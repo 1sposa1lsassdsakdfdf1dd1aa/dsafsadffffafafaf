@@ -1,0 +1,14 @@
+[
+    {
+        "name": "SSC | Extra 02",
+        "logo": "https://cdn.jsdelivr.net/gh/HelloPeopleTv4you/IPTV-Playlist@406da1fce47b6a0b713d4893c7c633b4bee2b645/img/SSC-Extra-2-300x188.png",
+        "url": "https://d3.dunyapurkaraja.com:999/hls/ptvpk.m3u8?md5=nntUTQEjBlDE3HIsmFlDew&expires=1739481985",
+        "referer": "https://stylisheleg4nt.com",
+        "origin": "https://stylisheleg4nt.com"
+    },
+    {
+        "name": "SSC | Extra 01",
+        "logo": "https://cdn.jsdelivr.net/gh/HelloPeopleTv4you/IPTV-Playlist@406da1fce47b6a0b713d4893c7c633b4bee2b645/img/SSC-Extra-1-300x188.png",
+        "error": "Token not found or failed to fetch."
+    }
+]
