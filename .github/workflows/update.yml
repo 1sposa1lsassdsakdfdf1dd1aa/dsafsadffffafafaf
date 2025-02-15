@@ -1,0 +1,33 @@
+name: Auto Update JSON and M3U
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"  # Runs every 6 hours
+
+jobs:
+  update-files:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install Requests Library
+      run: pip install requests
+
+    - name: Run Python Script
+      run: python script.py
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add NS_player.json ALL.m3u
+        git commit -m "Auto update NS_player.json and ALL.m3u"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
