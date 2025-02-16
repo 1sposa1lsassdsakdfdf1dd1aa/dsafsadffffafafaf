@@ -49,11 +49,8 @@ for channel in channels:
             "origin": "https://stylisheleg4nt.com"
         })
         
-        # Add custom HTTP headers and channel to M3U playlist
-        m3u_content += (
-            f'#EXTHTTP:{{"Origin":"https://stylisheleg4nt.com","Referer":"https://stylisheleg4nt.com/"}}\n'
-            f'#EXTINF:-1 tvg-logo="{channel["logo"]}", {channel["name"]}\n{link}\n'
-        )
+        # Add channel to M3U playlist
+        m3u_content += f'#EXTINF:-1 tvg-logo="{channel["logo"]}", {channel["name"]}\n{link}\n'
     else:
         result.append({
             "name": channel["name"],
