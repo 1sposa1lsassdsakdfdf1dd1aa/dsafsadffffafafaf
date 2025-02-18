@@ -1,0 +1,50 @@
+name: Auto Update JSON and M3U
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"  # Runs every 6 hours
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  update-files:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Ensures full history is fetched to prevent merge conflicts
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install Required Libraries
+      run: pip install requests
+
+    - name: Run Python Script
+      run: python script.py
+
+    - name: Handle Unstaged Changes
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        
+        # Check if there are unstaged changes
+        if ! git diff --quiet; then
+          echo "Stashing local changes..."
+          git stash  # Temporarily store unstaged changes
+          git pull --rebase origin main  # Pull with rebase
+          git stash pop || echo "No stash to apply"  # Restore changes
+        else
+          echo "No changes detected, pulling latest updates..."
+          git pull --rebase origin main
+        fi
+
+    - name: Commit and Push Changes
+      run: |
+        git add NS_player.json ALL.m3u
+        git commit -m "Auto update NS_player.json and ALL.m3u" || echo "No changes to commit"
+        git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
