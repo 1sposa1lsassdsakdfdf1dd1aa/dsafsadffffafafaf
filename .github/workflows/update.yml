@@ -2,7 +2,7 @@ name: Auto Update JSON and M3U
 
 on:
   schedule:
-    - cron: "0 */6 * * *"  # Runs every 6 hours
+    - cron: '*/10 * * * *' # Runs every
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
